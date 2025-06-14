@@ -331,7 +331,7 @@ main {
   .sub-para{
     font-size: 14px;
     letter-spacing: 0px;
-    text-align: center;  
+    /* text-align: center;   */
   }
   #about .about-col{
     flex-direction: column;
