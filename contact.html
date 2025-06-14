@@ -10,6 +10,60 @@
       src="https://kit.fontawesome.com/aa5f332820.js"
       crossorigin="anonymous"
     ></script>
+    <!-- Toast Notification CSS -->
+    <style>
+      .toast {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 15px 25px;
+        border-radius: 5px;
+        color: white;
+        font-weight: bold;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        transform: translateX(150%);
+        transition: transform 0.3s ease-in-out;
+        max-width: 300px;
+      }
+
+      .toast.show {
+        transform: translateX(0);
+      }
+
+      .toast.success {
+        background-color: #28a745;
+      }
+
+      .toast.warning {
+        background-color: #ffc107;
+        color: #212529;
+      }
+
+      .toast.error {
+        background-color: #dc3545;
+      }
+
+      .toast i {
+        margin-right: 10px;
+        font-size: 20px;
+      }
+
+      /* Error message styling */
+      .error-message {
+        color: #dc3545;
+        font-size: 12px;
+        margin-top: 5px;
+        display: none;
+      }
+
+      input.error,
+      textarea.error {
+        border: 1px solid #dc3545 !important;
+      }
+    </style>
   </head>
   <body>
     <!--------====== Header Start ========------->
@@ -19,10 +73,24 @@
         <img src="./image/profile-image-1.png" alt="" width="150px" />
         <h1>A Aravindraj</h1>
         <div class="social-icons">
-          <a href="https://github.com/Aravindraj03" target="_blank"><i class="fa-brands fa-github"></i></a>
-          <a href="https://www.instagram.com/aravindraj_aruldass/?igsh=aHB0dXZiaW92czRo#" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-          <a href="https://x.com/Aravindmary03?t=gliJMZ9Q0HdorAMF0D6z6g&s=08" target="_blank"><i class="fa-brands fa-twitter"></i></a>
-          <a href="https://www.linkedin.com/in/aravindraj-a-4949bb284?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="https://github.com/Aravindraj03" target="_blank"
+            ><i class="fa-brands fa-github"></i
+          ></a>
+          <a
+            href="https://www.instagram.com/aravindraj_aruldass/?igsh=aHB0dXZiaW92czRo#"
+            target="_blank"
+            ><i class="fa-brands fa-instagram"></i
+          ></a>
+          <a
+            href="https://x.com/Aravindmary03?t=gliJMZ9Q0HdorAMF0D6z6g&s=08"
+            target="_blank"
+            ><i class="fa-brands fa-twitter"></i
+          ></a>
+          <a
+            href="https://www.linkedin.com/in/aravindraj03/"
+            target="_blank"
+            ><i class="fa-brands fa-linkedin"></i
+          ></a>
         </div>
       </div>
 
@@ -30,20 +98,27 @@
       <nav>
         <ul>
           <li>
-            <a href="./index.html"><i class="fa-solid fa-house"></i> Home
+            <a href="./index.html"><i class="fa-solid fa-house"></i> Home </a>
+          </li>
+          <li>
+            <a href="./about.html"
+              ><i class="fa-solid fa-user"></i> About Me
             </a>
           </li>
           <li>
-            <a href="./about.html"><i class="fa-solid fa-user"></i> About Me </a>
+            <a href="./portfolio.html"
+              ><i class="fa-solid fa-briefcase"></i> Portfolio
+            </a>
           </li>
           <li>
-            <a href="./portfolio.html"><i class="fa-solid fa-briefcase"></i> Portfolio </a>
+            <a href="./service.html"
+              ><i class="fa-solid fa-server"></i> Services
+            </a>
           </li>
           <li>
-            <a href="./service.html"><i class="fa-solid fa-server"></i> Services </a>
-          </li>
-          <li>
-            <a href="#contact" class="active"><i class="fa-solid fa-envelope"></i> Contact </a>
+            <a href="#contact" class="active"
+              ><i class="fa-solid fa-envelope"></i> Contact
+            </a>
           </li>
         </ul>
       </nav>
@@ -52,7 +127,9 @@
       <div class="footer">
         <p>
           &copy; Copyright 2024 <br />Designed By
-          <a href="https://aravind.com" target="_blank">Aravind.com </a>
+          <a href="https://www.linkedin.com/in/aravindraj03/" target="_blank"
+            >https://github.com/Aravindraj03/
+          </a>
         </p>
       </div>
     </header>
@@ -65,6 +142,9 @@
     <!-----------====== ALL BODY CONTENT =======------------->
 
     <main>
+      <!-- Toast Notification Container -->
+      <div id="toast-container"></div>
+
       <!--============Contact Section Start============-->
       <section id="contact">
         <h1 class="sub-heading">Contact</h1>
@@ -84,7 +164,7 @@
                 <p>aravindmary03@gmail.com</p>
               </div>
             </div>
-            
+
             <!----Call Box------>
             <div class="icon-box">
               <div class="icon">
@@ -95,7 +175,7 @@
                 <p>+91 63829 81930</p>
               </div>
             </div>
-            
+
             <!----Location Box------>
             <div class="icon-box">
               <div class="icon">
@@ -109,17 +189,64 @@
 
             <!-----map----->
             <div class="map">
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31089.161554607806!2d80.1869868302953!3d13.089983134036915!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5264078822719b%3A0xbda01077b89581e2!2sAnna%20Nagar%2C%20Chennai%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1704723949204!5m2!1sen!2sin" width="100%" height="250" style="border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31089.161554607806!2d80.1869868302953!3d13.089983134036915!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5264078822719b%3A0xbda01077b89581e2!2sAnna%20Nagar%2C%20Chennai%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1704723949204!5m2!1sen!2sin"
+                width="100%"
+                height="250"
+                style="border: 0"
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+              ></iframe>
             </div>
           </div>
           <!------Right cal------->
           <div class="contact-right">
-            <form action="">
-              <input type="text" name="name" id="name" placeholder="Your Name">
-              <input type="email" name="email" id="email" placeholder="Your Email">
-              <input type="text" name="subject" id="subject" placeholder="Subject">
-              <textarea name="msg" id="msg" rows="9" placeholder="Your Message"></textarea>
-              <input type="submit" value="Send Message" onclick="button1()">
+            <form id="contact-form">
+              <div class="form-group">
+                <input
+                  type="text"
+                  name="name"
+                  id="name"
+                  placeholder="Your Name"
+                />
+                <div id="name-error" class="error-message">
+                  Please enter your name
+                </div>
+              </div>
+              <div class="form-group">
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  placeholder="Your Email"
+                />
+                <div id="email-error" class="error-message">
+                  Please enter a valid email
+                </div>
+              </div>
+              <div class="form-group">
+                <input
+                  type="text"
+                  name="subject"
+                  id="subject"
+                  placeholder="Subject"
+                />
+                <div id="subject-error" class="error-message">
+                  Please enter a subject
+                </div>
+              </div>
+              <div class="form-group">
+                <textarea
+                  name="msg"
+                  id="msg"
+                  rows="9"
+                  placeholder="Your Message"
+                ></textarea>
+                <div id="msg-error" class="error-message">
+                  Please enter your message
+                </div>
+              </div>
+              <input type="submit" value="Send Message" />
             </form>
           </div>
         </div>
@@ -129,8 +256,172 @@
 
     <!-- (For Typing Effect) -->
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <!-- EmailJS SDK -->
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
+    ></script>
     <!------- JS FILE -------->
-    <script src="./index.js"></script>
+    <script>
+      // Initialize EmailJS with your user ID
+      (function () {
+        emailjs.init("XjlmUI1YkdaCEfNDa"); // Replace with your actual EmailJS user ID
+      })();
+
+      // Function to show toast notification
+      function showToast(message, type) {
+        const toastContainer = document.getElementById("toast-container");
+        const toast = document.createElement("div");
+        toast.className = `toast ${type}`;
+
+        // Set icon based on type
+        let icon;
+        if (type === "success") {
+          icon = '<i class="fas fa-check-circle"></i>';
+        } else if (type === "warning") {
+          icon = '<i class="fas fa-exclamation-triangle"></i>';
+        } else {
+          icon = '<i class="fas fa-times-circle"></i>';
+        }
+
+        toast.innerHTML = `${icon}${message}`;
+        toastContainer.appendChild(toast);
+
+        // Show toast
+        setTimeout(() => {
+          toast.classList.add("show");
+        }, 100);
+
+        // Hide toast after 5 seconds
+        setTimeout(() => {
+          toast.classList.remove("show");
+          setTimeout(() => {
+            toast.remove();
+          }, 300);
+        }, 5000);
+      }
+
+      // Form validation functions
+      function validateName() {
+        const name = document.getElementById("name").value.trim();
+        const errorElement = document.getElementById("name-error");
+
+        if (name === "") {
+          document.getElementById("name").classList.add("error");
+          errorElement.style.display = "block";
+          return false;
+        } else {
+          document.getElementById("name").classList.remove("error");
+          errorElement.style.display = "none";
+          return true;
+        }
+      }
+
+      function validateEmail() {
+        const email = document.getElementById("email").value.trim();
+        const errorElement = document.getElementById("email-error");
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (email === "") {
+          errorElement.textContent = "Please enter your email";
+          document.getElementById("email").classList.add("error");
+          errorElement.style.display = "block";
+          return false;
+        } else if (!emailRegex.test(email)) {
+          errorElement.textContent = "Please enter a valid email";
+          document.getElementById("email").classList.add("error");
+          errorElement.style.display = "block";
+          return false;
+        } else {
+          document.getElementById("email").classList.remove("error");
+          errorElement.style.display = "none";
+          return true;
+        }
+      }
+
+      function validateSubject() {
+        const subject = document.getElementById("subject").value.trim();
+        const errorElement = document.getElementById("subject-error");
+
+        if (subject === "") {
+          document.getElementById("subject").classList.add("error");
+          errorElement.style.display = "block";
+          return false;
+        } else {
+          document.getElementById("subject").classList.remove("error");
+          errorElement.style.display = "none";
+          return true;
+        }
+      }
+
+      function validateMessage() {
+        const msg = document.getElementById("msg").value.trim();
+        const errorElement = document.getElementById("msg-error");
+
+        if (msg === "") {
+          document.getElementById("msg").classList.add("error");
+          errorElement.style.display = "block";
+          return false;
+        } else {
+          document.getElementById("msg").classList.remove("error");
+          errorElement.style.display = "none";
+          return true;
+        }
+      }
+
+      // Set up event listeners for real-time validation
+      document.getElementById("name").addEventListener("blur", validateName);
+      document.getElementById("email").addEventListener("blur", validateEmail);
+      document
+        .getElementById("subject")
+        .addEventListener("blur", validateSubject);
+      document.getElementById("msg").addEventListener("blur", validateMessage);
+
+      // Updated form submission handler
+      document
+        .getElementById("contact-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          // Validate all fields
+          const isNameValid = validateName();
+          const isEmailValid = validateEmail();
+          const isSubjectValid = validateSubject();
+          const isMsgValid = validateMessage();
+
+          if (!isNameValid || !isEmailValid || !isSubjectValid || !isMsgValid) {
+            showToast("Please fix the errors in the form", "error");
+            return;
+          }
+
+          showToast("Sending your message...", "warning");
+
+          const name = document.getElementById("name").value.trim();
+          const email = document.getElementById("email").value.trim();
+          const subject = document.getElementById("subject").value.trim();
+          const msg = document.getElementById("msg").value.trim();
+
+          // Updated email sending - remove to_email or ensure template uses it
+          emailjs
+            .send("service_3bbfmtm", "template_dccxm08", {
+              from_name: name,
+              from_email: email,
+              subject: subject,
+              message: msg,
+              // to_email: 'aravindmary03@gmail.com' // Either remove or keep based on template
+            })
+            .then(
+              function (response) {
+                showToast("Message sent successfully!", "success");
+                document.getElementById("contact-form").reset();
+              },
+              function (error) {
+                console.error("Email sending failed:", error);
+                showToast("Failed to send message: " + error.text, "error");
+              }
+            );
+        });
+    </script>
     <!---- FONT AWESOME ICON CDN---->
     <script
       src="https://kit.fontawesome.com/aa5f332820.js"
